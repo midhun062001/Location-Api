@@ -4,18 +4,20 @@ import com.locationapi.country.dto.CountryRequestDto;
 import com.locationapi.country.dto.CountryResponseDto;
 import com.locationapi.country.service.CountryServiceImpl;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
 public class CountryController {
+
     private CountryServiceImpl countryService;
 
+    @Autowired
     public CountryController(CountryServiceImpl countryService) {
         this.countryService = countryService;
     }
@@ -29,6 +31,15 @@ public class CountryController {
     @GetMapping("/get-all")
     public List<CountryResponseDto> findAll(){
         return countryService.findAll();
+    }
+
+    @PostMapping("/save-all-country")
+    public List<CountryResponseDto> saveAllCountry(@RequestParam("file") MultipartFile files){
+        try {
+            return countryService.saveAllCountry(files);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
 }

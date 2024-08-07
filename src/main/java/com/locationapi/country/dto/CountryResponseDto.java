@@ -6,6 +6,7 @@ public record CountryResponseDto(
         Integer id,
         String countryCode,
         String countryName,
+        String countryStd,
         String capital
 ) {
 }
