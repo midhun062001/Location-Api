@@ -4,11 +4,14 @@ import com.locationapi.state.entity.State;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.RequiredArgsConstructor;
+
 import java.util.List;
 
 
 @Entity
 @Data
+@RequiredArgsConstructor
 @NoArgsConstructor
 @Table(name = "country_mst")
 public class Country {
